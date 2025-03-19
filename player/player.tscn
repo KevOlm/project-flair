@@ -1,0 +1,52 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2ob40rqhcfaw"]
+
+[ext_resource type="Script" uid="uid://bdgn0e8cwqpcf" path="res://player/player.gd" id="1_jof31"]
+[ext_resource type="Script" uid="uid://bruv7ns0im0j3" path="res://weapons/weapon_manager.gd" id="2_boad6"]
+[ext_resource type="PackedScene" uid="uid://bcil1r47ogd1b" path="res://weapons/shotgun/shotgun.tscn" id="2_g1dw6"]
+[ext_resource type="Script" uid="uid://324phhd1wxdm" path="res://weapons/weapon_resource.gd" id="3_rgyib"]
+[ext_resource type="PackedScene" uid="uid://wdx8v3e4cikj" path="res://weapons/pistol/pistol.tscn" id="3_yw30f"]
+[ext_resource type="Resource" uid="uid://ekeclpa2lma5" path="res://weapons/w_resources/Shotgun.tres" id="4_hg6s5"]
+[ext_resource type="Resource" uid="uid://coapvhqdahjpy" path="res://weapons/w_resources/pistol.tres" id="5_8t03j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mfjac"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d17hv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_244h6"]
+albedo_color = Color(0.202723, 0.202723, 0.202723, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ratxf"]
+lightmap_size_hint = Vector2i(11, 10)
+material = SubResource("StandardMaterial3D_244h6")
+size = Vector3(0.7, 0.1, 0.7)
+
+[node name="player" type="CharacterBody3D"]
+script = ExtResource("1_jof31")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_mfjac")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_d17hv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, 0.173648, 0.0632084, 0.404, -0.219434)
+mesh = SubResource("BoxMesh_ratxf")
+
+[node name="Weapon_Manager" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.588794, 0.117045, -0.421092)
+script = ExtResource("2_boad6")
+_weapon_resource = Array[ExtResource("3_rgyib")]([ExtResource("4_hg6s5"), ExtResource("5_8t03j")])
+start_weapons = Array[String](["Shotgun", "Pistol"])
+
+[node name="Rig" type="Node3D" parent="Weapon_Manager"]
+
+[node name="Shotgun" parent="Weapon_Manager/Rig" instance=ExtResource("2_g1dw6")]
+process_mode = 4
+visible = false
+
+[node name="pistol" parent="Weapon_Manager/Rig" instance=ExtResource("3_yw30f")]
+
+[node name="shoot" type="Timer" parent="."]
+
+[connection signal="timeout" from="shoot" to="." method="_on_shoot_timeout"]

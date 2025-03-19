@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://coapvhqdahjpy"]
+
+[ext_resource type="Script" uid="uid://324phhd1wxdm" path="res://weapons/weapon_resource.gd" id="1_p1awx"]
+
+[resource]
+script = ExtResource("1_p1awx")
+w_name = "pistol"
+w_current_ammo = 10
+w_reserve_ammo = 10
+w_magazine = 10
+w_max_ammo = 30
+w_auto_fire = false
+metadata/_custom_type_script = "uid://324phhd1wxdm"

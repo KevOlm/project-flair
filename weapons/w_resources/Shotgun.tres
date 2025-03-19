@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://ekeclpa2lma5"]
+
+[ext_resource type="Script" uid="uid://324phhd1wxdm" path="res://weapons/weapon_resource.gd" id="1_vspgx"]
+
+[resource]
+script = ExtResource("1_vspgx")
+w_name = "Shotgun"
+w_current_ammo = 5
+w_reserve_ammo = 5
+w_magazine = 5
+w_max_ammo = 15
+w_auto_fire = true
+metadata/_custom_type_script = "uid://324phhd1wxdm"
